@@ -1,0 +1,12 @@
+{
+  "productos": [
+    { "id": "1", "nombre": "Teclado Mecánico RGB", "precio": 75, "categoria": "Periféricos", "stock": 25 },
+    { "id": "2", "nombre": "Monitor Gamer 24'' 144Hz", "precio": 190, "categoria": "Monitores", "stock": 12 },
+    { "id": "3", "nombre": "Mouse Óptico Inalámbrico", "precio": 45, "categoria": "Periféricos", "stock": 30 },
+    { "id": "4", "nombre": "Auriculares Cancelación Ruido", "precio": 110, "categoria": "Audio", "stock": 18 },
+    { "id": "5", "nombre": "Micrófono USB Condensador", "precio": 80, "categoria": "Audio", "stock": 15 }
+  ],
+  "usuarios": [
+    { "id": "1", "usuario": "admin", "contrasena": "admin123", "rol": "administrador" }
+  ]
+}

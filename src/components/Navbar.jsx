@@ -1,10 +1,34 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Info, ClipboardList, Mail, Sun, Moon, Layers } from 'lucide-react'
+import {
+  Home,
+  Package,
+  Bot,
+  LogIn,
+  BarChart3,
+  LogOut,
+  Sun,
+  Moon,
+  Layers,
+  ShieldCheck,
+} from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 
-function Navbar() {
+/**
+ * Barra de navegación principal del sistema.
+ * @param {Object} props
+ * @param {boolean} props.estaAutenticado Indica si hay una sesión activa
+ * @param {Object|null} props.usuario Información del usuario autenticado
+ * @param {Function} props.onCerrarSesion Manejador para cerrar sesión
+ */
+function Navbar({ estaAutenticado, usuario, onCerrarSesion }) {
   const location = useLocation()
   const { isDark, toggleTheme } = useTheme()
+
+  const handleLogout = () => {
+    if (onCerrarSesion) {
+      onCerrarSesion()
+    }
+  }
 
   return (
     <header className="navbar-container">
@@ -12,9 +36,9 @@ function Navbar() {
         <Link to="/" className="navbar-brand">
           <span className="brand-badge">
             <Layers size={14} />
-            React
+            Gestión
           </span>
-          <span className="brand-title">Rutas & Form</span>
+          <span className="brand-title">TechStore Admin</span>
         </Link>
 
         <div className="navbar-actions">
@@ -26,27 +50,59 @@ function Navbar() {
               <Home className="nav-link-icon" />
               <span>Inicio</span>
             </Link>
+
             <Link
-              to="/informacion"
-              className={`nav-link ${location.pathname === '/informacion' ? 'active' : ''}`}
+              to="/productos"
+              className={`nav-link ${location.pathname === '/productos' ? 'active' : ''}`}
             >
-              <Info className="nav-link-icon" />
-              <span>Información</span>
+              <Package className="nav-link-icon" />
+              <span>Productos</span>
             </Link>
+
             <Link
-              to="/formulario"
-              className={`nav-link ${location.pathname === '/formulario' ? 'active' : ''}`}
+              to="/asistente"
+              className={`nav-link ${location.pathname === '/asistente' ? 'active' : ''}`}
+              id="nav-link-asistente"
             >
-              <ClipboardList className="nav-link-icon" />
-              <span>Formulario</span>
+              <Bot className="nav-link-icon" />
+              <span>Asistente IA</span>
             </Link>
-            <Link
-              to="/contacto"
-              className={`nav-link ${location.pathname === '/contacto' ? 'active' : ''}`}
-            >
-              <Mail className="nav-link-icon" />
-              <span>Contacto</span>
-            </Link>
+
+            {!estaAutenticado ? (
+              <Link
+                to="/login"
+                className={`nav-link nav-link-highlight ${location.pathname === '/login' ? 'active' : ''}`}
+              >
+                <LogIn className="nav-link-icon" />
+                <span>Iniciar Sesión</span>
+              </Link>
+            ) : (
+              <>
+                <Link
+                  to="/admin/analisis"
+                  className={`nav-link nav-link-admin ${location.pathname === '/admin/analisis' ? 'active' : ''}`}
+                >
+                  <BarChart3 className="nav-link-icon" />
+                  <span>Panel Análisis</span>
+                </Link>
+
+                <div className="navbar-user-chip" title={`Rol: ${usuario?.rol || 'administrador'}`}>
+                  <ShieldCheck size={14} className="user-chip-icon" />
+                  <span className="user-chip-name">{usuario?.usuario || 'Admin'}</span>
+                </div>
+
+                <button
+                  type="button"
+                  className="nav-logout-btn"
+                  onClick={handleLogout}
+                  title="Cerrar sesión"
+                  id="btn-cerrar-sesion"
+                >
+                  <LogOut className="nav-link-icon" />
+                  <span>Salir</span>
+                </button>
+              </>
+            )}
           </nav>
 
           <button
