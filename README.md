@@ -1,4 +1,4 @@
-# Práctica de React: Navegación, Rutas y Formularios Controlados
+# Navegación, Rutas y Formularios Controlados
 
 Aplicación web desarrollada con **React** y **Vite** que implementa un sistema completo de enrutamiento mediante **React Router DOM**, formularios interactivos controlados con el hook `useState`, navegación programática, iconografía con **Lucide React** y alternancia de **Modo Oscuro / Modo Claro** con persistencia en `localStorage`.
 
